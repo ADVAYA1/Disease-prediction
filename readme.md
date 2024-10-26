@@ -52,5 +52,5 @@ The project utilizes multiple datasets:
 1. Clone the repository
 
 ```bash
-git clone [your-repository-url]
+git clone [[your-repository-url](https://github.com/ADVAYA1/Disease-prediction)]
 ```
