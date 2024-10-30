@@ -1,0 +1,102 @@
+{
+    "G protein coupled receptors": {
+      "Associated Diseases": [
+        "Cancer",
+        "Heart Disease",
+        "Asthma",
+        "Schizophrenia",
+        "Diabetes",
+        "Obesity"
+      ],
+      "Classification": "MED",
+      "Full Form": "Medical-Related Genes",
+      "Description": "G protein-coupled receptors (GPCRs) are involved in various signaling pathways that regulate physiological processes. They play a crucial role in the body's response to hormones and neurotransmitters, making them important in various diseases, including cancer, metabolic disorders, and neurological conditions."
+    },
+    "Tyrosine kinase": {
+      "Associated Diseases": [
+        "Breast Cancer",
+        "Leukemia",
+        "Lung Cancer",
+        "Colorectal Cancer",
+        "Glioblastoma",
+        "Ovarian Cancer"
+      ],
+      "Classification": "MED",
+      "Full Form": "Medical-Related Genes",
+      "Description": "Tyrosine kinases are enzymes that add phosphate groups to tyrosine residues on proteins, playing a significant role in cell signaling pathways that control cell growth, differentiation, and metabolism. Dysregulation can lead to various cancers and other diseases."
+    },
+    "Tyrosine phosphatase": {
+      "Associated Diseases": [
+        "Diabetes",
+        "Cancer",
+        "Autoimmune Diseases",
+        "Cardiac Hypertrophy",
+        "Rheumatoid Arthritis"
+      ],
+      "Classification": "MGL",
+      "Full Form": "Molecular Genetics Label",
+      "Description": "Tyrosine phosphatases remove phosphate groups from proteins, thereby regulating signaling pathways that control cell division and metabolism. Alterations in these enzymes can lead to diseases such as diabetes and autoimmune conditions."
+    },
+    "Synthetase": {
+      "Associated Diseases": [
+        "Metabolic Disorders",
+        "Cardiomyopathy",
+        "Cystic Fibrosis",
+        "Phenylketonuria",
+        "Glycogen Storage Diseases"
+      ],
+      "Classification": "MGL",
+      "Full Form": "Molecular Genetics Label",
+      "Description": "Synthetases are enzymes that facilitate the synthesis of amino acids and other molecules critical for metabolic processes. Deficiencies or mutations can result in various metabolic disorders and developmental issues."
+    },
+    "Synthase": {
+      "Associated Diseases": [
+        "Metabolic Disorders",
+        "Neurodegenerative Diseases",
+        "Alzheimer's Disease",
+        "Huntington's Disease"
+      ],
+      "Classification": "MGL",
+      "Full Form": "Molecular Genetics Label",
+      "Description": "Synthases are enzymes involved in the synthesis of complex molecules. They play crucial roles in metabolism, and their dysfunction can lead to neurodegenerative diseases and metabolic syndromes."
+    },
+    "Ion channel": {
+      "Associated Diseases": [
+        "Epilepsy",
+        "Cardiac Arrhythmias",
+        "Cystic Fibrosis",
+        "Myotonias",
+        "Asthma",
+        "Long QT Syndrome"
+      ],
+      "Classification": "RHB",
+      "Full Form": "Ribosomal/Protein Synthesis Processes",
+      "Description": "Ion channels are essential for maintaining membrane potential and facilitating the flow of ions across cell membranes. Mutations can lead to channelopathies, affecting muscle and nerve function and leading to various disorders, including cardiac and neurological conditions."
+    },
+    "Transcription factor": {
+      "Associated Diseases": [
+        "Cancer",
+        "Developmental Disorders",
+        "Cardiovascular Diseases",
+        "Neurodegenerative Diseases",
+        "Genetic Syndromes"
+      ],
+      "Classification": "EPD",
+      "Full Form": "Epigenetic Processes",
+      "Description": "Transcription factors are proteins that regulate the transcription of specific genes, influencing cellular function and development. Dysregulation can lead to cancers and developmental disorders, affecting cellular identity and function."
+    },
+    "Joint Processes/Protein Activity": {
+      "Associated Diseases": [
+        "Arthritis",
+        "Joint Degeneration",
+        "Cartilage Disorders",
+        "Osteoarthritis",
+        "Rheumatoid Arthritis",
+        "Gout"
+      ],
+      "Classification": "JPA",
+      "Full Form": "Joint Processes/Protein Activity",
+      "Description": "This classification includes genes that regulate joint health and the inflammatory processes associated with joint disorders. They play key roles in cartilage formation and repair, and their dysregulation is linked to various joint diseases, including arthritis and degenerative joint conditions."
+    }
+  }
+  

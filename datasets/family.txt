@@ -1,0 +1,8 @@
+Gene family,Number,Class label
+G protein coupled receptors,531,0
+Tyrosine kinase,534,1
+Tyrosine phosphatase,349,2
+Synthetase,672,3
+Synthase,711,4
+Ion channel,240,5
+Transcription factor,1343,6
