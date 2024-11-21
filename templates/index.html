@@ -7,31 +7,24 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-4bw+/aepP/YC94hEpVNVgiZdgIC5+VKNBQNGCHeKRQN+PtmoHDEXuppvnDJzQIu9" crossorigin="anonymous">
     <style>
         body {
-            background-color: black; /* Set the background color */
-            color: white; /* Change text color for better readability */
-            height: 100vh; /* Full height of the viewport */
-            display: flex; /* Use flexbox */
-            align-items: center; /* Center vertically */
-            justify-content: center; /* Center horizontally */
-            margin: 0; /* Remove default margin */
+            background-color: black; 
+            color: white; 
+            height: 100vh; 
+            display: flex; 
+            align-items: center; 
+            justify-content: center; 
+            margin: 0; 
         }
 
         .container {
-            background: rgba(30, 30, 30, 0.8); /* Slightly transparent for a modern look */
+            background: rgba(30, 30, 30, 0.8); 
             border-radius: 15px; 
             padding: 20px; 
             max-width: 600px; 
-            margin-bottom: 20px; /* Space between containers */
-            overflow-y: auto; /* Allow vertical scrolling */
-            max-height: 70vh; /* Limit height for scrolling */
-            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.5); /* Add depth */
-        }
-
-        .logo {
-            width: 50px;
-            height: 50px;
-            margin-top: 0;
-            margin-left: 2px;
+            margin-bottom: 20px; 
+            overflow-y: auto; 
+            max-height: 70vh; 
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.5); 
         }
 
         .myimg {
@@ -41,77 +34,74 @@
             border-radius: 25px;
         }
 
-        /* Styles for modals */
-        .modal-content {
-            background-color: black; /* Set modal background to black */
-            color: white; /* Set text color to white */
-        }
-        .modal-header {
-            background-color: #020606; /* Header background */
-            color: white; /* Header text color */
-        }
-        .modal-body {
-            background-color: black; /* Body background */
-            color: white; /* Body text color */
-        }
-
         .card {
-            margin-top: 20px; /* Space between cards */
-            border: none; /* Remove border for cleaner look */
+            margin-top: 20px;
+            border: none;
         }
 
         .card-header {
-            background-color: rgba(0, 123, 255, 0.7); /* Semi-transparent for cards */
-            color: white; /* Header text color */
+            background-color: rgba(0, 123, 255, 0.7); 
+            color: white;
         }
 
         h1, h5, h6 {
-            color: #00ff00; /* Highlight header text for better visibility */
+            color: #00ff00; 
         }
 
-        /* Scrollbar styles */
-        .container::-webkit-scrollbar {
-            width: 8px; /* Width of the scrollbar */
+        /* Styling for suggestions dropdown */
+        #suggestions {
+            position: absolute;
+            background-color: #333;
+            color: red;
+            border: 1px solid #ccc;
+            max-height: 150px;
+            overflow-y: auto;
+            width: 100%;
+            z-index: 1000;
+            border-radius: 5px;
+            margin-top: 5px;
         }
 
-        .container::-webkit-scrollbar-thumb {
-            background: #007bff; /* Color of the scrollbar thumb */
-            border-radius: 10px; /* Rounded edges */
+        .suggestion-item {
+            padding: 8px;
+            cursor: pointer;
         }
 
-        .container::-webkit-scrollbar-track {
-            background: rgba(255, 255, 255, 0.1); /* Background of the scrollbar track */
+        .suggestion-item:hover {
+            background-color: #f1f1f1;
+        }
+
+        /* Adjust the textarea size */
+        #symptoms {
+            min-height: 150px;
+            max-height: 200px;
+            width: 100%;
         }
     </style>
 </head>
 <body>
-    <!-- Navbar -->
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
         <div class="container-fluid">
             <div class="logo">
                 <img class="myimg" src="{{ url_for('static', filename='img.png') }}" alt="Nexus AI Logo">
             </div>
             <a class="navbar-brand" href="#">Nexus Ai</a>
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon"></span>
-            </button>
         </div>
     </nav>
     
-    <!-- Main form of the page -->
     <div class="container-fluid d-flex flex-row justify-content-center align-items-start">
-        <!-- Entry Container -->
         <div class="col-md-6">
             <div class="container">
                 <h1 class="mt-4 my-4 text-center">Nexus Ai</h1>
                 <form action="/predict" method="post">
                     <div class="form-group">
                         <label for="symptoms">Select Symptoms:</label>
-                        <input type="text" class="form-control" id="symptoms" name="symptoms" placeholder="Type symptoms such as itching, sleeping, aching etc">
+                        <textarea class="form-control" id="symptoms" name="symptoms" placeholder="Type symptoms..." autocomplete="off" onkeyup="filterSymptoms()" rows="5">{{ request.form.get('symptoms') }}</textarea>
+                        <div id="suggestions"></div>
                     </div>
                     <div class="form-group mt-3">
                         <label for="gene_sequence">Genetic Sequence (optional):</label>
-                        <input type="text" class="form-control" id="gene_sequence" name="gene_sequence" placeholder="Enter genetic sequence (e.g., AGCTTGACCTGA)" pattern="[ATCGatcg]*">
+                        <input type="text" class="form-control" id="gene_sequence" name="gene_sequence" placeholder="Enter genetic sequence (e.g., AGCTTGACCTGA)" pattern="[ATCGatcg]*" value="{{ request.form.get('gene_sequence') }}">
                         <small class="form-text text-muted">Use only A, T, C, G letters</small>
                     </div>
                     {% if message %}
@@ -122,19 +112,19 @@
             </div>
         </div>
 
-        <!-- Display results if available -->
+        <!-- Results Section -->
         <div class="col-md-6">
             <div class="container">
                 {% if predicted_disease %}
                     <h1 class="text-center my-4">Our AI System Results</h1>
-
-                    <!-- Disease Prediction -->
                     <div class="card my-3">
-                        <div class="card-header">
-                            Predicted Disease
-                        </div>
+                        <div class="card-header">Predicted Disease</div>
                         <div class="card-body">
-                            <p>{{ predicted_disease }}</p>
+                            <ul>
+                                {% for disease, probability in predicted_disease %}
+                                    <li>{{ disease }} - probability: {{ probability|round(2) }}%</li>
+                                {% endfor %}
+                            </ul>
                         </div>
                     </div>
 
@@ -203,10 +193,9 @@
                             </ul>
                         </div>
                     </div>
-                {% else %}
+                    {% else %}
                     <p class="text-center mt-4">Please submit symptoms to get predictions.</p>
                 {% endif %}
-
                 {% if genetic_result %}
                 <div class="card my-3">
                     <div class="card-header">
@@ -238,5 +227,61 @@
     </div>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-HwwvtgBNo3bZJJLYd8oVXjrBZt8cqVSpeBNS5n7C8IVInixGAoxmnlMuBnhbgrkm" crossorigin="anonymous"></script>
+
+    <script>
+        // Predefined list of symptoms
+        const symptomsList = [
+            "itching", "skin_rash", "nodal_skin_eruptions", "continuous_sneezing", "shivering", "chills", "joint_pain", 
+            "stomach_pain", "acidity", "ulcers_on_tongue", "muscle_wasting", "vomiting", "burning_micturition", 
+            "spotting_urination", "fatigue", "weight_gain", "anxiety", "cold_hands_and_feets", "mood_swings", "weight_loss", 
+            "restlessness", "lethargy", "patches_in_throat", "irregular_sugar_level", "cough", "high_fever", "sunken_eyes", 
+            "breathlessness", "sweating", "dehydration", "indigestion", "headache", "yellowish_skin", "dark_urine", "nausea", 
+            "loss_of_appetite", "pain_behind_the_eyes", "back_pain", "constipation", "abdominal_pain", "diarrhoea", "mild_fever", 
+            "yellow_urine", "yellowing_of_eyes", "acute_liver_failure", "fluid_overload", "swelling_of_stomach", "swelled_lymph_nodes", 
+            "malaise", "blurred_and_distorted_vision", "phlegm", "throat_irritation", "redness_of_eyes", "sinus_pressure", "runny_nose", 
+            "congestion", "chest_pain", "weakness_in_limbs", "fast_heart_rate", "pain_during_bowel_movements", "pain_in_anal_region", 
+            "bloody_stool", "irritation_in_anus", "neck_pain", "dizziness", "cramps", "bruising", "obesity", "swollen_legs", 
+            "swollen_blood_vessels", "puffy_face_and_eyes", "enlarged_thyroid", "brittle_nails", "swollen_extremeties", "excessive_hunger", 
+            "extra_marital_contacts", "drying_and_tingling_lips", "slurred_speech", "knee_pain", "hip_joint_pain", "muscle_weakness", 
+            "stiff_neck", "swelling_joints", "movement_stiffness", "spinning_movements", "loss_of_balance", "unsteadiness", 
+            "weakness_of_one_body_side", "loss_of_smell", "bladder_discomfort", "foul_smell_of_urine", "continuous_feel_of_urine", 
+            "passage_of_gases", "internal_itching", "toxic_look_(typhos)", "depression", "irritability", "muscle_pain", "altered_sensorium", 
+            "red_spots_over_body", "belly_pain", "abnormal_menstruation", "dischromic_patches", "watering_from_eyes", "increased_appetite", 
+            "polyuria", "family_history", "mucoid_sputum", "rusty_sputum", "lack_of_concentration", "visual_disturbances", 
+            "receiving_blood_transfusion", "receiving_unsterile_injections", "coma", "stomach_bleeding", "distention_of_abdomen", 
+            "history_of_alcohol_consumption", "fluid_overload", "blood_in_sputum", "prominent_veins_on_calf", "palpitations", 
+            "painful_walking", "pus_filled_pimples", "blackheads", "scurring", "skin_peeling", "silver_like_dusting", 
+            "small_dents_in_nails", "inflammatory_nails", "blister", "red_sore_around_nose", "yellow_crust_ooze", "prognosis"
+        ];
+
+        // Function to filter symptoms
+        function filterSymptoms() {
+            const input = document.getElementById('symptoms').value.toLowerCase();
+            const suggestionsDiv = document.getElementById('suggestions');
+            suggestionsDiv.innerHTML = ''; // Clear previous suggestions
+
+            if (input) {
+                const words = input.split(/\s+/); // Split input by spaces to get individual words
+                const lastWord = words[words.length - 1].toLowerCase(); // Get the last word
+
+                const filteredSymptoms = symptomsList
+                    .filter(symptom => symptom.startsWith(lastWord)) // Filter symptoms starting with the last word
+                    .sort(); // Sort alphabetically
+
+                filteredSymptoms.forEach(symptom => {
+                    const div = document.createElement('div');
+                    div.classList.add('suggestion-item');
+                    div.innerText = symptom;
+                    div.onclick = function() {
+                        // Replace last word with the selected symptom
+                        words[words.length - 1] = symptom;
+                        document.getElementById('symptoms').value = words.join(' '); // Update the textarea with new word
+                        suggestionsDiv.innerHTML = ''; // Clear suggestions
+                    };
+                    suggestionsDiv.appendChild(div);
+                });
+            }
+        }
+    </script>
 </body>
 </html>
