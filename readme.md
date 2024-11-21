@@ -32,7 +32,6 @@ A comprehensive healthcare application that leverages artificial intelligence fo
 - **Machine Learning:** scikit-learn
 - **Algorithms:**
   - Support Vector Machine (SVC)
-  - Decision Tree Classifier
   - Random Forest Classifier
 
 ## 📊 Datasets
