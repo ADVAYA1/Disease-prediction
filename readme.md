@@ -17,7 +17,7 @@ A comprehensive healthcare application that leverages artificial intelligence fo
 
 - **Genetic Disease Prediction**
   - Classification of genes across seven major gene families
-  - Analysis using Decision Tree and Random Forest classifiers
+  - Analysis using Random Forest classifiers
   - Specialized categorization system:
     - Medical-related (MED)
     - Molecular Genetics Label (MGL)
