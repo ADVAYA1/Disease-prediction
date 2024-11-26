@@ -114,7 +114,7 @@ class GeneticSequenceClassifier:
             )
             print("Training RandomForest...")
         elif self.model_type == 'svc':
-            self.model = SVC(kernel='linear', C=1, random_state=42)  
+            self.model = SVC(kernel='linear', C=1, random_state=42)  # Using linear kernel for simplicity
             print("Training Support Vector Classifier...")
         else:
             raise ValueError(f"Model type {self.model_type} is not recognized.")
@@ -223,14 +223,14 @@ print(classification_report(y_test, y_pred_svc))
 
 # Save both models
 print("\nSaving models...")
-rf_classifier.save('geneticrandom_forest_classifier.pkl')
-svc_classifier.save('geneticsvc_classifier.pkl')
+rf_classifier.save('geneticrf.pkl')
+svc_classifier.save('geneticsvc.pkl')
 
 # Assuming the 'GeneticSequenceClassifier' class and the models are already defined and saved.
 
 # Load the trained models
-rf_classifier = GeneticSequenceClassifier.load('geneticrandom_forest_classifier.pkl')
-svc_classifier = GeneticSequenceClassifier.load('geneticsvc_classifier.pkl')
+rf_classifier = GeneticSequenceClassifier.load('geneticrf.pkl')
+svc_classifier = GeneticSequenceClassifier.load('geneticsvc.pkl')
 
 # Define the gene sequence for testing
 test_sequence = "AGCTC"
